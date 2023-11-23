@@ -1,3 +1,38 @@
+## 0.3.5
+
+* [deb-maker] Supports custom binary name
+
+## 0.3.4
+
+* bump `shell_executor` to 0.1.4
+* Supports custom `FLUTTER_ROOT` environment variable.
+* Support defining environment variables in releases and jobs.
+
+## 0.3.3
+
+* [apk-builer] fix apk not found 
+
+## 0.3.2
+
+* Update dart sdk version to ">=2.16.0 <4.0.0"
+* feat: compress macOS app with 7zip
+* [dmg-maker] Rename `backgroundColor` to `background-color` in `MakeDmgConfig`
+* [dmg-maker] fix: fix make_dmg_config lost <window> specification (#120)
+* [deb-maker] Fixes #117 install and uninstall errors (#121)
+* fix(docs): fix exe make_config.yaml example error
+* chore: Optimize msix maker
+
+## 0.3.1
+
+* Add `direct` maker
+* [rpm] fix lib/*.so rpath before packaging (#110)
+* feat:fix appdmg “icon-size” Specification。 (#113)
+* Add `firebase-hosting` publisher.
+* Add `vercel` publisher.
+* Modify the `publish` method to accept `FileSystemEntity` instead of just `File`
+* Add the `workingDirectory` parameter to the `DefaultShellExecutor` and related classes.
+* Bump `shell_executor` to 0.1.2.
+
 ## 0.3.0
 
 * bump flutter to 3.7

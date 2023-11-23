@@ -1,3 +1,23 @@
+## 0.3.5
+
+* [deb-maker] Supports custom binary name
+
+## 0.3.4
+
+* bump `shell_executor` to 0.1.4
+
+## 0.3.2
+
+* Update dart sdk version to ">=2.16.0 <4.0.0"
+* feat: compress macOS app with 7zip
+
+## 0.3.1
+
+* Add `direct` maker
+* [rpm] fix lib/*.so rpath before packaging (#110)
+* feat:fix appdmg “icon-size” Specification。 (#113)
+* Bump `shell_executor` to 0.1.2.
+
 ## 0.3.0
 
 * **FEAT**: apk & app maker support profile mode.

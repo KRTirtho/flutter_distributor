@@ -29,6 +29,7 @@ class CommandPublish extends Command {
         'playstore',
         'pgyer',
         'qiniu',
+        'vercel',
       ].join(','),
       help: 'The target provider(s) to publish to.',
     );
@@ -112,6 +113,10 @@ class CommandPublish extends Command {
       ].join('\n'),
     );
 
+    // Firebase Hosting
+    argParser.addSeparator('firebase-hosting');
+    argParser.addOption('firebase-hosting-project-id', valueHelp: '');
+
     // Github
     argParser.addSeparator('github');
 
@@ -142,6 +147,11 @@ class CommandPublish extends Command {
     argParser.addOption('qiniu-bucket', valueHelp: '');
     argParser.addOption('qiniu-bucket-domain', valueHelp: '');
     argParser.addOption('qiniu-savekey-prefix', valueHelp: '');
+
+    // Vercel
+    argParser.addSeparator('vercel');
+    argParser.addOption('vercel-org-id', valueHelp: '');
+    argParser.addOption('vercel-project-id', valueHelp: '');
   }
 
   final FlutterDistributor distributor;
@@ -192,6 +202,7 @@ class CommandPublish extends Command {
       'firebase-testers-file': argResults?['firebase-testers-file'],
       'firebase-groups': argResults?['firebase-groups'],
       'firebase-groups-file': argResults?['firebase-groups-file'],
+      'firebase-hosting-project-id': argResults?['firebase-hosting-project-id'],
       'github-repo-owner': argResults?['github-repo-owner'],
       'github-repo-name': argResults?['github-repo-name'],
       'github-release-title': argResults?['github-release-title'],
@@ -199,10 +210,17 @@ class CommandPublish extends Command {
       'qiniu-bucket': argResults?['qiniu-bucket'],
       'qiniu-bucket-domain': argResults?['qiniu-bucket-domain'],
       'qiniu-savekey-prefix': argResults?['qiniu-savekey-prefix'],
+      'vercel-org-id': argResults?['vercel-org-id'],
+      'vercel-project-id': argResults?['vercel-project-id'],
     }..removeWhere((key, value) => value == null);
 
+    final fileSystemEntity =
+        await FileSystemEntity.type(path) == FileSystemEntityType.directory
+            ? Directory(path)
+            : File(path);
+
     return distributor.publish(
-      File(path),
+      fileSystemEntity,
       targets,
       publishArguments: publishArguments,
     );

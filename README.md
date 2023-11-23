@@ -33,6 +33,7 @@ The full documentation can be found on [distributor.leanflutter.org](https://dis
 - [exe](./packages/flutter_app_packager/lib/src/makers/exe/) - Create a `exe` package for your app.
 - [ipa](./packages/flutter_app_packager/lib/src/makers/ipa/) - Create a `ipa` package for your app.
 - [msix](./packages/flutter_app_packager/lib/src/makers/msix/) - Create a `msix` package for your app.
+- [pkg](./packages/flutter_app_packager/lib/src/makers/pkg/) - Create a `pkg` package for your app.
 - [rpm](./packages/flutter_app_packager/lib/src/makers/rpm/) - Create a `rpm` package for your app.
 - [zip](./packages/flutter_app_packager/lib/src/makers/zip/) - Create a `zip` package for your app.
 
@@ -42,9 +43,12 @@ The full documentation can be found on [distributor.leanflutter.org](https://dis
 - [appstore](./packages/flutter_app_publisher/lib/src/publishers/appstore/) - Publish your app to `appstore`.
 - [fir](./packages/flutter_app_publisher/lib/src/publishers/fir/) - Publish your app to `fir`.
 - [firebase](./packages/flutter_app_publisher/lib/src/publishers/firebase/) - Publish your app to `firebase`.
+- [firebase_hosting](./packages/flutter_app_publisher/lib/src/publishers/firebase_hosting/) - Publish your app to `firebase_hosting`.
 - [github](./packages/flutter_app_publisher/lib/src/publishers/github/) - Publish your app to `github` release.
 - [pgyer](./packages/flutter_app_publisher/lib/src/publishers/pgyer/) - Publish your app to `pgyer`.
+- [playstore](./packages/flutter_app_publisher/lib/src/publishers/playstore/) - Publish your app to `playstore`.
 - [qiniu](./packages/flutter_app_publisher/lib/src/publishers/qiniu/) - Publish your app to `qiniu`.
+- [vercel](./packages/flutter_app_publisher/lib/src/publishers/vercel/) - Publish your app to `vercel`.
 
 ## Getting Started
 
@@ -59,7 +63,7 @@ dart pub global activate flutter_distributor
 Add `distribute_options.yaml` to your project root directory.
 
 ```yaml
-env:
+variables:
   PGYER_API_KEY: "your api key"
 output: dist/
 releases:
@@ -120,6 +124,7 @@ flutter_distributor release --name dev
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/hiperioncn"><img src="https://avatars.githubusercontent.com/u/6045710?v=4?s=100" width="100px;" alt="Hiperion"/><br /><sub><b>Hiperion</b></sub></a><br /><a href="https://github.com/leanflutter/flutter_distributor/commits?author=hiperioncn" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/GroovinChip"><img src="https://avatars.githubusercontent.com/u/4250470?v=4?s=100" width="100px;" alt="Reuben Turner"/><br /><sub><b>Reuben Turner</b></sub></a><br /><a href="https://github.com/leanflutter/flutter_distributor/commits?author=GroovinChip" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://animator.github.io"><img src="https://avatars.githubusercontent.com/u/615622?v=4?s=100" width="100px;" alt="Ankit Mahato"/><br /><sub><b>Ankit Mahato</b></sub></a><br /><a href="https://github.com/leanflutter/flutter_distributor/commits?author=animator" title="Documentation">📖</a></td>
     </tr>
   </tbody>
   <tfoot>

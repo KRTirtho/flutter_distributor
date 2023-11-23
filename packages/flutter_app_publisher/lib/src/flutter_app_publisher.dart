@@ -8,14 +8,16 @@ class FlutterAppPublisher {
     AppPackagePublisherAppStore(),
     AppPackagePublisherFir(),
     AppPackagePublisherFirebase(),
+    AppPackagePublisherFirebaseHosting(),
     AppPackagePublisherGithub(),
     AppPackagePublisherPgyer(),
     AppPackagePublisherPlayStore(),
     AppPackagePublisherQiniu(),
+    AppPackagePublisherVercel(),
   ];
 
   Future<PublishResult> publish(
-    File file, {
+    FileSystemEntity fileSystemEntity, {
     required String target,
     Map<String, String>? environment,
     Map<String, dynamic>? publishArguments,
@@ -25,7 +27,7 @@ class FlutterAppPublisher {
       (e) => e.name == target,
     );
     return await publisher.publish(
-      file,
+      fileSystemEntity,
       environment: environment,
       publishArguments: publishArguments,
       onPublishProgress: onPublishProgress,

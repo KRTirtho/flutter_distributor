@@ -1,6 +1,7 @@
-env:
-# PGYER_API_KEY: your api key
 output: dist/
+variables:
+  FLUTTER_ROOT: ~/fvm/versions/3.10.0
+  # PGYER_API_KEY: your api key
 releases:
   - name: dev-profile
     jobs:
@@ -61,7 +62,7 @@ releases:
           target: exe
           build_args:
             profile: true
-      # msix does not support profile mode yet    
+      # msix does not support profile mode yet
       # - name: windows-msix
       #   package:
       #     platform: windows
@@ -77,6 +78,8 @@ releases:
   - name: dev-release
     jobs:
       - name: android-aab
+        variables:
+          FLUTTER_ROOT: ~/fvm/versions/3.10.2
         package:
           platform: android
           target: aab
@@ -110,6 +113,10 @@ releases:
         package:
           platform: macos
           target: dmg
+      - name: macos-pkg
+        package:
+          platform: macos
+          target: pkg
       - name: macos-zip
         package:
           platform: macos
@@ -126,3 +133,7 @@ releases:
         package:
           platform: windows
           target: zip
+      - name: web-direct
+        package:
+          platform: web
+          target: direct

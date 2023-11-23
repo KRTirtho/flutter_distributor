@@ -35,25 +35,24 @@ class FlutterDistributor {
     return _pubspec!;
   }
 
-  final Map<String, String> _environment = {};
-  Map<String, String> get environment {
-    if (_environment.keys.isEmpty) {
+  final Map<String, String> _globalVariables = {};
+  Map<String, String> get globalVariables {
+    if (_globalVariables.keys.isEmpty) {
       for (String key in Platform.environment.keys) {
         String? value = Platform.environment[key];
         if ((value ?? '').isNotEmpty) {
-          _environment[key] = value!;
+          _globalVariables[key] = value!;
         }
       }
-      List<String> keys = distributeOptions.env?.keys.toList() ?? [];
+      List<String> keys = distributeOptions.variables?.keys.toList() ?? [];
       for (String key in keys) {
-        String? value = distributeOptions.env?[key];
-
+        String? value = distributeOptions.variables?[key];
         if ((value ?? '').isNotEmpty) {
-          _environment[key] = value!;
+          _globalVariables[key] = value!;
         }
       }
     }
-    return _environment;
+    return _globalVariables;
   }
 
   DistributeOptions? _distributeOptions;
@@ -131,6 +130,7 @@ class FlutterDistributor {
     String? artifactName,
     required bool cleanBeforeBuild,
     required Map<String, dynamic> buildArguments,
+    Map<String, String>? variables,
   }) async {
     List<MakeResult> makeResultList = [];
 
@@ -155,6 +155,7 @@ class FlutterDistributor {
               platform,
               target: target,
               arguments: buildArguments,
+              environment: variables ?? globalVariables,
             );
             print(JsonEncoder.withIndent('  ').convert(buildResult.toJson()));
             logger.info(
@@ -187,8 +188,9 @@ class FlutterDistributor {
             buildOutputFiles: buildResult.outputFiles,
           );
           print(JsonEncoder.withIndent('  ').convert(makeResult.toJson()));
+          FileSystemEntity artifact = makeResult.artifacts.first;
           logger.info(
-            'Successfully packaged ${makeResult.outputFile.path}'.brightGreen(),
+            'Successfully packaged ${artifact.path}'.brightGreen(),
           );
           makeResultList.add(makeResult);
         }
@@ -205,9 +207,10 @@ class FlutterDistributor {
   }
 
   Future<List<PublishResult>> publish(
-    File file,
+    FileSystemEntity fileSystemEntity,
     List<String> targets, {
     Map<String, dynamic>? publishArguments,
+    Map<String, String>? variables,
   }) async {
     List<PublishResult> publishResultList = [];
     try {
@@ -244,9 +247,9 @@ class FlutterDistributor {
         }
 
         PublishResult publishResult = await _publisher.publish(
-          file,
+          fileSystemEntity,
           target: target,
-          environment: environment,
+          environment: variables ?? globalVariables,
           publishArguments: newPublishArguments,
           onPublishProgress: (sent, total) {
             if (!progressBar.isActive) {
@@ -316,6 +319,11 @@ class FlutterDistributor {
             '${'===>'.blue()} ${'Releasing'.white(bold: true)} $name:${job.name.green(bold: true)}',
           );
 
+          Map<String, String> variables = {}
+            ..addAll(globalVariables)
+            ..addAll(release.variables ?? {})
+            ..addAll(job.variables ?? {});
+
           List<MakeResult> makeResultList = await package(
             job.package.platform,
             [job.package.target],
@@ -323,6 +331,7 @@ class FlutterDistributor {
             artifactName: distributeOptions.artifactName,
             cleanBeforeBuild: needCleanBeforeBuild,
             buildArguments: job.package.buildArgs ?? {},
+            variables: variables,
           );
           // Clean only once
           needCleanBeforeBuild = false;
@@ -330,10 +339,12 @@ class FlutterDistributor {
           if (job.publish != null || job.publishTo != null) {
             String? publishTarget = job.publishTo ?? job.publish?.target;
             MakeResult makeResult = makeResultList.first;
+            FileSystemEntity artifact = makeResult.artifacts.first;
             await publish(
-              makeResult.outputFile,
+              artifact,
               [publishTarget!],
               publishArguments: job.publish?.args,
+              variables: variables,
             );
           }
         }

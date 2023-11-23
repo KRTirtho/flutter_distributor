@@ -27,11 +27,14 @@
 
 - [apk](./packages/flutter_app_packager/lib/src/makers/apk/) - 为你的应用创建一个 `apk` 包。
 - [aab](./packages/flutter_app_packager/lib/src/makers/aab/) - 为你的应用创建一个 `aab` 包。
+- [appimage](./packages/flutter_app_packager/lib/src/makers/appimage/) - 为你的应用创建一个 `AppImage` 包。
 - [deb](./packages/flutter_app_packager/lib/src/makers/deb/) - 为你的应用创建一个 `deb` 包。
 - [dmg](./packages/flutter_app_packager/lib/src/makers/dmg/) - 为你的应用创建一个 `dmg` 包。
 - [exe](./packages/flutter_app_packager/lib/src/makers/exe/) - 为你的应用创建一个 `exe` 包。
 - [ipa](./packages/flutter_app_packager/lib/src/makers/ipa/) - 为你的应用创建一个 `ipa` 包。
 - [msix](./packages/flutter_app_packager/lib/src/makers/msix/) - 为你的应用创建一个 `msix` 包。
+- [pkg](./packages/flutter_app_packager/lib/src/makers/pkg/) - 为你的应用创建一个 `pkg` 包。
+- [rpm](./packages/flutter_app_packager/lib/src/makers/rpm/) - 为你的应用创建一个 `rpm` 包。
 - [zip](./packages/flutter_app_packager/lib/src/makers/zip/) - 为你的应用创建一个 `zip` 包。
 
 ### 发布器
@@ -40,9 +43,12 @@
 - [appstore](./packages/flutter_app_publisher/lib/src/publishers/appstore/) - 把你的应用发布到 `appstore`.
 - [fir](./packages/flutter_app_publisher/lib/src/publishers/fir/) - 把你的应用发布到 `fir`。
 - [firebase](./packages/flutter_app_publisher/lib/src/publishers/firebase/) - 把你的应用发布到 `firebase`。
+- [firebase_hosting](./packages/flutter_app_publisher/lib/src/publishers/firebase_hosting/) - 把你的应用发布到 `firebase_hosting`。
 - [github](./packages/flutter_app_publisher/lib/src/publishers/github/) - 把你的应用发布到 `github` release。
 - [pgyer](./packages/flutter_app_publisher/lib/src/publishers/pgyer/) - 把你的应用发布到 `pgyer`。
+- [playstore](./packages/flutter_app_publisher/lib/src/publishers/playstore/) - Publish your app to `playstore`.
 - [qiniu](./packages/flutter_app_publisher/lib/src/publishers/qiniu/) - 把你的应用发布到 `qiniu`。
+- [vercel](./packages/flutter_app_publisher/lib/src/publishers/vercel/) - 把你的应用发布到 `vercel`。
 
 ## 立即开始
 
@@ -57,7 +63,7 @@ dart pub global activate flutter_distributor
 将 `distribute_options.yaml` 添加到你的项目根目录。
 
 ```yaml
-env:
+variables:
   PGYER_API_KEY: "your api key"
 output: dist/
 releases:
@@ -118,6 +124,7 @@ flutter_distributor release --name dev
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/hiperioncn"><img src="https://avatars.githubusercontent.com/u/6045710?v=4?s=100" width="100px;" alt="Hiperion"/><br /><sub><b>Hiperion</b></sub></a><br /><a href="https://github.com/leanflutter/flutter_distributor/commits?author=hiperioncn" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/GroovinChip"><img src="https://avatars.githubusercontent.com/u/4250470?v=4?s=100" width="100px;" alt="Reuben Turner"/><br /><sub><b>Reuben Turner</b></sub></a><br /><a href="https://github.com/leanflutter/flutter_distributor/commits?author=GroovinChip" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://animator.github.io"><img src="https://avatars.githubusercontent.com/u/615622?v=4?s=100" width="100px;" alt="Ankit Mahato"/><br /><sub><b>Ankit Mahato</b></sub></a><br /><a href="https://github.com/leanflutter/flutter_distributor/commits?author=animator" title="Documentation">📖</a></td>
     </tr>
   </tbody>
   <tfoot>
